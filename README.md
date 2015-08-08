@@ -2,6 +2,11 @@
 ## Bloccit: a Reddit replica to teach the fundamentals of web development and Rails.
 
 Made with my mentor at [Bloc](http://bloc.io).
+
+stack is cedar-14
+https://chrissteeb-bloccit.herokuapp.com/ | https://git.heroku.com/chrissteeb-bloccit.git
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
