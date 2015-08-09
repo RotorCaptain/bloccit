@@ -13,7 +13,20 @@ p#index-title {
     padding: 5px;
     height: 200px;
 }
-section {
+.social-btn {
+    text-align: center;
+    font-size: 15px;
+    color: purple;
+    border: solid;
+    width: 200px;
+	height: 200px;
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+    
+  <div class="social-btn">
+    <h2>Share with the World</h2>
+        <p>Bloccit will share your ideas, all over the world.</p>
+  </div> 
 }// Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
