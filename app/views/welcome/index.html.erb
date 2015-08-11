@@ -1,4 +1,7 @@
-<h1>Welcome to Bloccit</h1>
-<p id="index-title"> This is the home page for Bloccit.</p>
+<h1>All Posts</h1>
+<% @posts.each do |post| %>
+    <p><%= link_to post.title, post_path(post.id) %></p>
+<% end %>
+
 
 
