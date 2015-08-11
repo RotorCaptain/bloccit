@@ -55,3 +55,5 @@ gem 'bootstrap-sass'
 gem 'pry-rails'
 
 gem 'thin'
+
+gem 'faker'
