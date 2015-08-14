@@ -1,9 +1,9 @@
-require 'faker'
+include RandomData
 
 50.times do
     Post.create!(
-        title: Faker::Lorem.sentence,
-        body:  Faker::Lorem.paragraph
+        title: RandomData.random_sentence,
+        body:  RandomData.random_paragraph
     )
 end
 posts = Post.all
@@ -12,14 +12,7 @@ posts = Post.all
 100.times do
     Comment.create!(
         post: posts.sample,
-        body: Faker::Lorem.paragraph
-    )
-end
-
-1.times do
-    Post.find_or_create_by(
-        title: "A Unique Title!",
-        body: "This is a  unique post."
+        body: RandomData.random_paragraph
     )
 end
 
