@@ -1,8 +1,20 @@
+
 h1 {
     color: red;
 }
 
-
+.social-btn {
+   background: black;
+   border-style: solid;
+   border-width: 5px;
+   margin: 40px 40px 40px 40px;
+   padding: 10px 10px 10px 10px;
+   font-size: 48px;
+   font-style:times;
+   text-align:center;
+   color: white;
+   vertical-align: middle;
+ }
 
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
