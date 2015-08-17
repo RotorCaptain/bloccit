@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    @posts = Post.all_with_censored
   end
 
   def show
@@ -13,7 +13,4 @@ class PostsController < ApplicationController
   def edit
   end
   
-  def censored
-    @posts = Post.select {|x| x % 5 == 0}
-  end
 end
