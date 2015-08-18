@@ -11,21 +11,21 @@ class PostsController < ApplicationController
     @post = Post.new
   end
   
-def create
+  def create
   @post = Post.new
-  @post.title = params[:post][:title]
-  @post.body = params[:post][:body]
+    @post.title = params[:post][:title]
+    @post.body = params[:post][:body]
   
-  if @post.save
+    if @post.save
     
-    flash[:notice] = "Post was saved."
-    redirect_to @post
-  else
+      flash[:notice] = "Post was saved."
+     redirect_to @post
+    else
     
-    flash[:error] = "There was an error saving the post. Please try again."
-    render :new
+      flash[:error] = "There was an error saving the post. Please try again."
+      render :new
+    end
   end
-end
 
   def edit
   end

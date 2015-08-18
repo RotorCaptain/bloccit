@@ -23,4 +23,9 @@ module RandomData
         letters.shuffle!
         letters[0,rand(3..8)].join
     end
+    
+    def random_integer
+        numbers = rand(1..9)
+        numbers
+    end
 end
