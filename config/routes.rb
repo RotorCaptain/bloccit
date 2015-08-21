@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get 'posts/question'
 
   resources :posts
+  
+  resources :questions
 
    get 'about' => 'welcome#about'
 

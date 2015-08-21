@@ -12,11 +12,11 @@ RSpec.describe AdvertisementsController, type: :controller do
     end
     
     it "assigns my_ad to @ads" do
-     
       get :index
       expect(assigns(:ads)).to eq([my_ad])
     end
   end
+
 
     describe "GET new" do
       it "returns http success" do
@@ -24,7 +24,6 @@ RSpec.describe AdvertisementsController, type: :controller do
         expect(response).to have_http_status(:success)
       end
  
-
       it "renders the #new view" do
         get :new
         expect(response).to render_template :new
@@ -37,8 +36,8 @@ RSpec.describe AdvertisementsController, type: :controller do
       end
     end
  
+ 
     describe "ADVERTISEMENT create" do
-
       it "increases the number of advertisement by 1" do
         expect{post :create, advertisement: {title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: RandomData.random_integer}}.to change(Advertisement,:count).by(1)
       end
@@ -56,8 +55,8 @@ RSpec.describe AdvertisementsController, type: :controller do
       end
   end
   
+  
     describe "GET show" do
-      
      it "returns http success" do
 
        get :show, {id: my_ad.id}

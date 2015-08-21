@@ -17,8 +17,25 @@ let (:my_question) { Question.create!(title: RandomData.random_sentence, body: R
     end
   end
 
+   describe "GET new" do
+      it "returns http success" do
+        get :new
+        expect(response).to have_http_status(:success)
+      end
+ 
+      it "renders the #new view" do
+        get :new
+        expect(response).to render_template :new
+      end
+ 
+      it "instantiates @questions" do
+        get :new
+        expect(assigns(:question)).not_to be_nil
+      end
+    end
+  
+  
   describe "GET show" do
-      
      it "returns http success" do
 
        get :show, {id: my_question.id}
@@ -36,27 +53,9 @@ let (:my_question) { Question.create!(title: RandomData.random_sentence, body: R
        expect(assigns(:question)).to eq(my_question)
      end
    end
-
-   describe "GET new" do
-      it "returns http success" do
-        get :new
-        expect(response).to have_http_status(:success)
-      end
- 
-      it "renders the #new view" do
-        get :new
-        expect(response).to render_template :new
-      end
- 
-
-      it "instantiates @questions" do
-        get :new
-        expect(assigns(:question)).not_to be_nil
-      end
-    end
-  
+   
+   
   describe "QUESTION create" do
-
       it "increases the number of question by 1" do
         expect{post :create, question: {title: RandomData.random_sentence, body: RandomData.random_paragraph }}.to change(Question,:count).by(1)
       end
@@ -72,6 +71,7 @@ let (:my_question) { Question.create!(title: RandomData.random_sentence, body: R
       end
   end
   
+  
   describe "GET edit" do
      it "returns http success" do
        get :edit, {id: my_question.id}
@@ -85,12 +85,14 @@ let (:my_question) { Question.create!(title: RandomData.random_sentence, body: R
      end
     end
 
+
   describe "GET #resolved" do
     it "returns http success" do
       get :resolved
       expect(response).to have_http_status(:success)
     end
   end
+
 
   describe "DELETE destroy" do
      it "deletes the question" do
