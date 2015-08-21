@@ -119,10 +119,10 @@ RSpec.describe PostsController, :type => :controller do
       end
       
       it "redirects to posts index" do
-      delete :destroy, {id: my_post.id}
+        delete :destroy, {id: my_post.id}
       
-      expect(response).to redirect_to posts_path
+        expect(response).to redirect_to posts_path
+      end
     end
-  end
   
 end

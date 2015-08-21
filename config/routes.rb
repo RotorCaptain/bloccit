@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'posts/new'
 
   get 'posts/edit'
+  
+  get 'posts/destroy'
 
   resources :posts
 

@@ -43,17 +43,17 @@ end
       flash[:error] = "There was an error saving the post. Please try again!"
       render :edit
     end
+ end
+ 
+  def destroy
+    @post = Post.find(params[:id])
     
-    def destroy
-      @post = Post.find(params[:id])
-      
-      if @post.destroy
-        flash[:notice] = "\"#{@post.title}\" was deleted successfully."
-        redirect_to posts_path
-      else
-        flash[:error] = "There was an error deleting the post."
-        render :show
-      end
+    if @post.destroy
+      flash[:notice] = "\"#{@post.title}\" was deleted successfully."
+      redirect_to posts_path
+    else
+      flash[:error] = "There was an error deleting the post."
+      render :show
     end
   end
 end
