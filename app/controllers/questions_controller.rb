@@ -13,9 +13,9 @@ class QuestionsController < ApplicationController
   
   def create
     @question = Question.new
-    @question.title = params[:advertisement][:title]
-    @question.body = params[:advertisement][:body]
-    @question.resolved = params[:advertisement][:resolved]
+    @question.title = params[:question][:title]
+    @question.body = params[:question][:body]
+    @question.resolved = params[:question][:resolved]
     
       if @question.save
     
@@ -34,7 +34,7 @@ class QuestionsController < ApplicationController
 
   def resolved
     @question = Question
-    @question.update_attributes(params.require(:question).permit(:title, :body, :resolved))
+    @question.update_attributes(params.require(:question).permit(:resolved))
   end
 
   def destroy
