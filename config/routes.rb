@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 
   get 'posts/edit'
   
-
   get 'posts/question'
 
   get 'posts/destroy'
