@@ -33,8 +33,9 @@ class QuestionsController < ApplicationController
   end
 
   def resolved
-    @question = Question
-    @question.update_attributes(params.require(:question).permit(:resolved))
+    @question = Question.find(params[:id])
+    @question.resolved = params[:question][:resolved]
+    @question.save
   end
 
   def destroy
