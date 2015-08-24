@@ -56,19 +56,19 @@ let (:my_question) { Question.create!(title: RandomData.random_sentence, body: R
    
    
   describe "QUESTION create" do
-      it "increases the number of question by 1" do
-        expect{post :create, question: {title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: RandomData.random_boolean}}.to change(Question,:count).by(1)
-      end
+    it "increases the number of question by 1" do
+      expect{post :create, question: {title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: RandomData.random_boolean}}.to change(Question,:count).by(1)
+    end
  
-      it "assigns the new question to @questions" do
-        post :create, question: {title: RandomData.random_sentence, body: RandomData.random_paragraph,  resolved: RandomData.random_boolean}
-        expect(assigns(:question)).to eq Question.last
-      end
+    it "assigns the new question to @questions" do
+      post :create, question: {title: RandomData.random_sentence, body: RandomData.random_paragraph,  resolved: RandomData.random_boolean}
+      expect(assigns(:question)).to eq Question.last
+    end
  
-      it "redirects to the new question" do
-        post :create, question: {title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: RandomData.random_boolean}
-        expect(response).to redirect_to Question.last
-      end
+    it "redirects to the new question" do
+      post :create, question: {title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: RandomData.random_boolean}
+      expect(response).to redirect_to Question.last
+    end
   end
   
   
@@ -80,32 +80,40 @@ let (:my_question) { Question.create!(title: RandomData.random_sentence, body: R
  
      it "renders the #edit view" do
        get :edit, {id: my_question.id}
-
        expect(response).to render_template :edit
      end
     end
 
 
-  describe "GET #resolved" do
+  describe "GET resolved" do
     it "returns http success" do
-      get :resolved
+      get :resolved, {id: my_question.id, question: {resolved: true}}
       expect(response).to have_http_status(:success)
     end
   end
 
-
+  describe "GET updated" do
+    it "returns http success" do
+      get :updated, {id: my_question.id}
+      expect(response). to have_http_status(:success)
+    end
+    
+    it "renders the #updated view" do
+       get :updated, {id: my_question.id}
+       expect(response).to render_template :update
+    end
+  end
+  
   describe "DELETE destroy" do
-     it "deletes the question" do
+    it "deletes the question" do
+      delete :destroy, {id: my_question.id}
+      count = Question.where({id: my_question.id}).size
+      expect(count).to eq 0
+    end
+ 
+    it "redirects to question index" do
        delete :destroy, {id: my_question.id}
- 
-       count = Question.where({id: my_question.id}).size
-       expect(count).to eq 0
-     end
- 
-     it "redirects to question index" do
-       delete :destroy, {id: my_question.id}
- 
-       expect(response).to redirect_to posts_path
-     end
-   end
+       expect(response).to redirect_to questions_path
+    end
+  end
 end

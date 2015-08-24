@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'questions/resolved'
 
   get 'questions/delete'
+  
+  get 'questions/updated'
 
   get 'posts/index'
 
