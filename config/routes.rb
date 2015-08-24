@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   
   get 'posts/destroy'
 
-  resources :posts
+  resources :topics do
+    
+     resources :posts, except: [:index]
+   end
 
    get 'about' => 'welcome#about'
 
