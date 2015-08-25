@@ -93,13 +93,14 @@ let (:my_question) { Question.create!(title: RandomData.random_sentence, body: R
   end
 
   describe "GET updated" do
+   
     it "returns http success" do
-      get :updated, {id: my_question.id}
+      post :updated, {id: my_question.id, question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: true} }
       expect(response). to have_http_status(:success)
     end
     
     it "renders the #updated view" do
-       get :updated, {id: my_question.id}
+       post :updated, {id: my_question.id, question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: true} }
        expect(response).to render_template :update
     end
   end

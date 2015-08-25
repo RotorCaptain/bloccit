@@ -23,13 +23,11 @@ RSpec.describe PostsController, :type => :controller do
         expect(response).to have_http_status(:success)
       end
  
-
       it "renders the #new view" do
         get :new
         expect(response).to render_template :new
       end
  
-
       it "instantiates @post" do
         get :new
         expect(assigns(:post)).not_to be_nil
@@ -42,12 +40,10 @@ RSpec.describe PostsController, :type => :controller do
         expect{post :create, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}}.to change(Post,:count).by(1)
       end
  
- 
       it "assigns the new post to @post" do
         post :create, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}
         expect(assigns(:post)).to eq Post.last
       end
- 
  
       it "redirects to the new post" do
         post :create, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}
