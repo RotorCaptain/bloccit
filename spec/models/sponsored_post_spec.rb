@@ -3,61 +3,19 @@ include RandomData
 
 RSpec.describe SponsoredPost, type: :model do
     
-  let(:my_sponsored_post) { my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, price: RandomData.random_integer) }
+  let(:sponsored_post) { Sponsored_Post.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, price: RandomData.random_integer) }
   
-  describe "GET show" do
-    it "returns http success" do
-        get :show, topic_id: my_topic.id, id: my_sponsored_post.id
-        expect(response).to have_http_status(:success)
-    end
-     
-    it "renders the #show view" do
-      get :show, topic_id: my_topic.id, id: my_sponsored_post.id
-      expect(response).to render_template :show
+  context "attributes" do
+     it "should respond to title" do
+       expect(sponsored_post).to respond_to(:title)
      end
  
-     it "assigns my_sponsored_post to @sponsored" do
-       get :show, {id: my_sponsored_post.id}
-       expect(assigns(:post)).to eq(my_sponsored_post)
+     it "should respond to body" do
+       expect(sponsored_post).to respond_to(:body)
+     end
+ 
+     it "should respond to price" do
+       expect(sponsored_post).to respond_to(:price)
      end
    end
-   
-  describe "GET new" do
-    it "returns http success" do
-      get :new, topic_id: my_sponsored_post.id
-      expect(response).to have_http_status(:success)
-    end
-
-    it "renders the #new view" do
-      get :new, topic_id: my_topic.id
-      expect(response).to render_template :new
-    end
- 
-    it "initializes @sponsored" do
-      get :new, topic_id: my_topic.id
-      expect(assigns(:post)).not_to be_nil
-    end
-  end
-  
-  describe "GET edit" do
-    it "returns http success" do
-      get :edit, topic_id: my_topic.id, id: my_sponsored_post.id
-      expect(response).to have_http_status(:success)
-    end
- 
-    it "renders the #edit view" do
-      get :edit, topic_id: my_topic.id, id: my_sponsored_post.id
-      expect(response).to render_template :edit
-    end
-     
-    it "assigns post to be updated to @sponsoredt" do
-      get :edit, topic_id: my_topic.id, id:my_sponsored_post.id
-      sponsored_post_instance = assigns(:post)
-
-      expect(sponsored_post_instance.id).to eq my_sponsored_post.id
-      expect(sponsored_post_instance.title).to eq my_sponsored_post.title
-      expect(sponsored_post_instance.body).to eq my_sponsored_post.body
-      expect(sponsored_post_instance.price).to eq my_sponsored_post.price
-    end
-  end
-end
+ end
