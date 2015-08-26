@@ -15,8 +15,9 @@ class QuestionsController < ApplicationController
     @question = Question.new
     @question.title = params[:question][:title]
     @question.body = params[:question][:body]
-    @question.resolved = params[:question][:resolved]
-    
+    if params[:question][:resolved].present?
+      @question.resolved = params[:question][:resolved]
+    end
       if @question.save
     
         flash[:notice] = "Question was saved."

@@ -92,16 +92,24 @@ let (:my_question) { Question.create!(title: RandomData.random_sentence, body: R
     end
   end
 
-  describe "GET updated" do
+  describe "PUT update" do
    
     it "returns http success" do
-      post :updated, {id: my_question.id, question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: true} }
-      expect(response). to have_http_status(:success)
+      new_title = RandomData.random_sentence
+      new_body = RandomData.random_paragraph
+      
+      put :update, {id: my_question.id, question: { title: new_title, body: new_body, resolved: true} }
+      
+      updated_question = assigns(:question)
+      expect(updated_question.id).to eq my_question.id
+      expect(updated_question.title).to eq new_title
+      expect(updated_question.body).to eq new_body
+      expect(updated_question.resolved).to eq true
     end
     
     it "renders the #updated view" do
-       post :updated, {id: my_question.id, question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: true} }
-       expect(response).to render_template :update
+       put :update, {id: my_question.id, question: { title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: true} }
+       expect(response).to redirect_to my_question
     end
   end
   
