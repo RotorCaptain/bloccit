@@ -1,15 +1,16 @@
 class SponsoredPostController < ApplicationController
   
   def new
-    @topic = Topic.find(params[:topic_id])
-    @sponsored = Sponsored.new
+    @sponsored = SponsoredPost.new
   end
   
   def show
-    @sponsored = Sponsored.find(params[:id])
+    @topic = Topic.find(params[:topic_id])
+    @sponsored = SponsoredPost.find(params[:id])
   end
 
   def edit
-    @sponsored = Sponsored.find(params[:id])
+    @topic = Topic.find(params[:topic_id])
+    @sponsored = SponsoredPost.find(params[:id])
   end
 end
