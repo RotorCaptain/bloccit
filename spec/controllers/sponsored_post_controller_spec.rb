@@ -55,7 +55,7 @@ RSpec.describe SponsoredPostController, type: :controller do
       expect(sponsored_instance.id).to eq my_sponsored.id
       expect(sponsored_instance.title).to eq my_sponsored.title
       expect(sponsored_instance.body).to eq my_sponsored.body
-       expect(sponsored_instance.price).to eq my_sponsored.price
+      expect(sponsored_instance.price).to eq my_sponsored.price
     end
   end
 
