@@ -12,9 +12,12 @@
     <ul class="nav nav-tabs">
       <li><%= link_to "Bloccit", root_path %></li>
       <li><%= link_to "About", about_path %></li>
-      
       <li><%= link_to "Topics", topics_path %></li>
-    </ul>
+      
+      <div class="pull-right user-info">
+       <%= link_to "Sign Up", new_user_path %>
+     </div>
+  </ul>
 
     <% if flash[:notice] %>
       <div class="allert alert-success">
