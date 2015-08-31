@@ -17,14 +17,14 @@ class AdvertisementsController < ApplicationController
     @ad.copy = params[:advertisement][:copy]
     @ad.price = params[:advertisement][:price]
     
-      if @ad.save
+    if @ad.save
     
-        flash[:notice] = "Ad was saved."
-        redirect_to @ad
-      else
+      flash[:notice] = "Ad was saved."
+      redirect_to @ad
+    else
     
-        flash[:error] = "There was an error saving the ad. Please try again."
-        render :new
-      end
+      flash[:error] = "There was an error saving the ad. Please try again."
+      render :new
+    end
   end
 end
