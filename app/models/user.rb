@@ -1,9 +1,12 @@
 class User < ActiveRecord::Base
   has_many :posts
     
-  before_save { self.email = email.downcase }
-    
+  before_save  :downcase_email
+
+  
+
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  NAME_REGEX = /\A[A-Z][a-z]*\b/
     
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
     
@@ -16,4 +19,8 @@ class User < ActiveRecord::Base
               format: { with: EMAIL_REGEX }
     
   has_secure_password
+  
+  def downcase_email
+    self.email = email.downcase
+  end
 end
