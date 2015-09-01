@@ -43,6 +43,15 @@ admin = User.create!(
   role:     'admin'
   )
   
+moderator = User.new(
+   name:     'Moderator User',
+   email:    'moderator@example.com',
+   password: 'helloworld',
+   role:     'moderator'
+ )
+ moderator.skip_confirmation!
+ moderator.save!
+
 member = User.create!(
   name:     'Member User',
   email:    'membern@example.com',
