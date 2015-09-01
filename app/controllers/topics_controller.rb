@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+  
   def index
     @topics = Topic.all
   end
@@ -15,8 +16,7 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
     
     if @topic.save
-      redirect_to @topic, notice: 'Topic was successfully saved'
-
+      redirect_to @topic, notice: "Topic was successfully saved"
     else
       flash[:error] = "Error creating topic. Please try again."
       render :new
@@ -29,7 +29,6 @@ class TopicsController < ApplicationController
 
   def update
     @topic = Topic.find(params[:id])
-
     @topic.assign_attributes(topic_params)
 
     if @topic.save
