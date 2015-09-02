@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-<<<<<<< HEAD
+
   
   before_action :require_sign_in, expect: :show
   before_action :authorize_user, except: [:show, :new, :create]
@@ -8,28 +8,22 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
   
-=======
 
   before_action :require_sign_in, except: :show
 
->>>>>>> checkpoint-39
+
   def show
-    
     @post = Post.find(params[:id])
   end
 
   def new
     @topic = Topic.find(params[:topic_id])
-    
     @post = Post.new
   end
 
   def create
-  
-
      @topic = Topic.find(params[:topic_id])
      @post = @topic.posts.build(post_params)
-
      @post.user = current_user
 
   
@@ -48,7 +42,9 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-<<<<<<< HEAD
+  def destroy
+    @post = Post.find(params[:id])
+     
     if @post.destroy
       flash[:notice] = "\"#{@post.title}\" was deleted successfully."
         
@@ -71,9 +67,8 @@ class PostsController < ApplicationController
        flash[:error] = "You must be an admin to do that."
        redirect_to [post.topic, post]
      end
-   end
-end
-=======
+  end
+
   def update
      @post = Post.find(params[:id])
      @post.assign_attributes(post_params)
@@ -85,7 +80,7 @@ end
        flash[:error] = "There was an error saving the post. Please try again."
        render :edit
      end
-   end
+  end
 
    def destroy
      @post = Post.find(params[:id])
@@ -101,8 +96,7 @@ end
    end
 
    private
-   def post_params
+  def post_params
      params.require(:post).permit(:title, :body)
-   end
+  end
 end
->>>>>>> checkpoint-39
