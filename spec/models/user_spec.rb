@@ -10,6 +10,7 @@ RSpec.describe User, type: :model do
  
    
   it { should validate_presence_of(:email) }
+  
   it { should validate_uniqueness_of(:email) }
   it { should validate_length_of(:email).is_at_least(3) }
   it { should allow_value("user@bloccit.com").for(:email) }
@@ -89,6 +90,5 @@ RSpec.describe User, type: :model do
     it "should be an invalid user due to incorrectly formatted email address" do
       expect(user_with_invalid_email_format).to_not be_valid
     end
- 
   end
 end

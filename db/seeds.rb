@@ -37,27 +37,14 @@ posts = Post.all
   )
 end
 
-
 admin = User.create!(
   name:     'Admin User',
   email:    'admin@example.com',
   password: 'helloworld',
   role:     'admin'
-)
-
-
-
-
-  
-
-
-
+  )
 
 Topic.find_or_create_by(name: 'The most perfect topic', description: 'To describe this topic would be silly')
-
-
-
-
 
 Post.find_or_create_by(title: 'This is my unique title.', body: 'This is the body of my unique post')
 

@@ -10,23 +10,18 @@ Rails.application.routes.draw do
   get 'posts/destroy'
 
   resources :topics do
-    
     resources :posts, except: [:index]
-    
-   end
+  end
    
   resources :posts, only: [] do
     resources :comments, only: [:create, :destroy]
   end
 
-  resources :advertisements
-  resources :questions
-  resources :users, only: [:new, :create]
   
+  resources :users, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
   
-  resources :advertisements
-  resources :questions
+
   
   post 'users/confirm' => 'users#confirm'
   
