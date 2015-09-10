@@ -1,8 +1,9 @@
 <div class="media">
-   <div class="media-body">
-     <small>
+  <div class="media-body">
+    <%= @post.title %> <br>
+    <small>
        <%= post.user.name %> commented <%= time_ago_in_words(post.created_at) %> ago
-     </small>
-     <p><%= post.body %></p>
-   </div>
- </div>
+    </small>
+    <p><%= post.body %></p>
+  </div>
+</div>

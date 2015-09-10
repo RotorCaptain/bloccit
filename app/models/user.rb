@@ -5,12 +5,7 @@ class User < ActiveRecord::Base
 
   before_save { self.email = email.downcase }
   before_save { self.role ||= :member }
-    
-
   before_save  :downcase_email
-
-  
-
 
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   NAME_REGEX = /\A[A-Z][a-z]*\b/
