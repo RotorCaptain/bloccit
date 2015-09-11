@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :labels, only: [:show]
+  
   get 'posts/index'
 
   get 'posts/show'

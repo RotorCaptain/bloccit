@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
 
   def show
-    set_post
-    set_topic
+    @post
+    @topic
   end
 
   def new
@@ -12,15 +12,15 @@ class PostsController < ApplicationController
   end
 
   def create
-    set_topic
+    @topic
     @post = current_user.posts.build(post_params)
     @post.topic = @topic
     
 
     if @post.save
+      @post.labels = Label.update_labels(params[:post][:labels])
       flash[:notice] = "Post was saved."
         
-      # redirect extracts the id from @post
       redirect_to [@topic, @post]
     else
       flash[:error] = "There was an error saving the post. Please try again."
@@ -29,15 +29,16 @@ class PostsController < ApplicationController
   end
   
   def edit
-    set_topic
-    set_post
+    @topic
+    @post
   end
 
   def update
-    set_topic
-    set_post
-    
-    if @post.update_attributes(post_params)
+    @post = Post.find(params[:id])
+    @post.assign_attributes(post_params)
+
+    if @post.save
+       @post.labels = Label.update_labels(params[:post][:labels])
         flash[:notice] = "Post was updated."
         redirect_to [@topic, @post]
     else
