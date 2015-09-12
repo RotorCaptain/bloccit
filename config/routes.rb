@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'rating/show'
+
   resources :labels, only: [:show]
   
   get 'posts/index'
