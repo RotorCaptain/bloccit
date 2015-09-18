@@ -1,41 +1,34 @@
 Rails.application.routes.draw do
-  get 'rating/show'
-
-  resources :labels, only: [:show]
-  
-  get 'posts/index'
-
-  get 'posts/show'
-
-  get 'posts/new'
-
-  get 'posts/edit'
-  
-  get 'posts/destroy'
+  get 'ratings/show'
 
   resources :topics do
-    
     resources :posts, except: [:index]
-    
-   end
-   
+    resources :sponsored_posts, except: [:index]
+  end
+
   resources :posts, only: [] do
     resources :comments, only: [:create, :destroy]
   end
 
-  resources :advertisements
-  resources :questions
   resources :users, only: [:new, :create]
-  
+
   resources :sessions, only: [:new, :create, :destroy]
-  
+
   resources :advertisements
   resources :questions
-  
+
+  resources :labels, only: [:show]
+
+
+
+  #remove get "welcome/index" because we've declared the index view as the root view.
+  #We also modify the about route to allow users to type /about, rather than /welcome/about.
   post 'users/confirm' => 'users#confirm'
-  
-   get 'about' => 'welcome#about'
+
+  get 'about' => 'welcome#about'
+
+  get 'faq' => 'welcome#faq'
 
   root to: 'welcome#index'
- 
+
 end

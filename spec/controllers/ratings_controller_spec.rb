@@ -14,7 +14,6 @@ RSpec.describe RatingsController, type: :controller do
        expect(response).to render_template :show
      end
  
- 
     it "assigns my_rating to @rating" do
       get :show, id: my_rating.id
       expect(assigns(:rating)).to eq(my_rating)

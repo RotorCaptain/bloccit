@@ -1,16 +1,15 @@
 class TopicsController < ApplicationController
   
-
   before_action :require_sign_in, except: [:index, :show]
   before_action :authorize_user, except: [:index, :show]
   
-
   def index
     @topics = Topic.all
   end
 
   def show
     @topic = Topic.find(params[:id])
+    @posts = @topic.posts
   end
 
   def new
@@ -19,13 +18,21 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(topic_params)
-    
+    if current_user.moderator?
+
+    flash[:error] = "You are not authorized for that action."
+    redirect_to @topic
+
+    else
     if @topic.save
       @topic.labels = Label.update_labels(params[:topic][:labels])
-      redirect_to @topic, notice: "Topic was successfully saved"
+      @topic.rating = Rating.update_rating(params[:topic][:rating])
+      redirect_to @topic, notice: "Topic was successfully saved."
+
     else
       flash[:error] = "Error creating topic. Please try again."
       render :new
+      end
     end
   end
 
@@ -35,10 +42,12 @@ class TopicsController < ApplicationController
 
   def update
     @topic = Topic.find(params[:id])
+
     @topic.assign_attributes(topic_params)
 
     if @topic.save
       @topic.labels = Label.update_labels(params[:topic][:labels])
+      @topic.rating = Rating.update_rating(params[:topic][:rating])
       flash[:notice] = "Topic was updated."
       redirect_to @topic
     else
@@ -49,13 +58,19 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic = Topic.find(params[:id])
+    if current_user.moderator?
 
-    if @topic.destroy
-      flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
-      redirect_to action: :index
+    flash[:error] = "You are not authorized for that action."
+    redirect_to @topic
+
     else
-      flash[:error] = 'There was an error in deleting the topic.'
-      render :show
+      if @topic.destroy
+        flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
+        redirect_to action: :index
+      else
+        flash[:error] = 'Threre was an error in deleting the topic.'
+        render :show
+      end
     end
   end
 
@@ -64,12 +79,11 @@ class TopicsController < ApplicationController
   def topic_params
     params.require(:topic).permit(:name, :description, :public)
   end
-  
+
   def authorize_user
-    unless current_user.admin?
-      flash[:error] = "You must be an admin to do that."
+    unless current_user.admin? || current_user.moderator?
+      flash[:error] = "You are not authorized for that action."
       redirect_to topics_path
     end
   end
 end
-

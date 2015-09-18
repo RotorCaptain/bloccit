@@ -1,13 +1,13 @@
 class Rating < ActiveRecord::Base
   enum severity: [ :PG, :PG13, :R ]
 
-  has_many :ratings
-  
-  belongs_to :rateable, polymorphc: true
-  belongs_to :rating
-  
-  has_many :topics, through: :ratings, source: :rateable, source_type :Topic
-  
-  has_many :posts, through: :ratings, source: :rateable, source_type: :Post
-  
+  has_many :topics
+  has_many :posts
+  belongs_to :rateable, polymorphic: true
+
+  def self.update_rating(rating_string)
+    if rating_string != nil
+      Rating.find_or_create_by(severity: rating_string.to_sym)
+    end
+  end
 end
