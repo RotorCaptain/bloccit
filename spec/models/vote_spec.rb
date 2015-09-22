@@ -7,7 +7,6 @@ RSpec.describe Vote, type: :model do
   let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user) }
   let(:vote) { Vote.create!(value: 1, post: post, user: user) }
  
-
   it { should belong_to(:post) }
   it { should belong_to(:user) }
 
@@ -22,8 +21,7 @@ RSpec.describe Vote, type: :model do
        vote.save
      end
  
-     it "#update_post should call update_rank on post " do
- 
+     it "#update_post should call update_rank on post " dos
        expect(post).to receive(:update_rank).at_least(:once)
        vote.save
      end

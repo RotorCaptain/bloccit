@@ -1,42 +1,38 @@
 Rails.application.routes.draw do
-  resources :labels, only: [:show]
   
-  get 'posts/index'
-
-  get 'posts/show'
-
-  get 'posts/new'
-
-  get 'posts/edit'
   
-  get 'posts/destroy'
+  get 'ratings/show'
 
   resources :topics do
-    
     resources :posts, except: [:index]
-    
-   end
-   
+    resources :sponsored_posts, except: [:index]
+  end
+
   resources :posts, only: [] do
     resources :comments, only: [:create, :destroy]
-    
+
     post '/up-vote' => 'votes#up_vote', as: :up_vote
     post '/down-vote' => 'votes#down_vote', as: :down_vote
   end
 
-  resources :advertisements
-  resources :questions
   resources :users, only: [:new, :create]
-  
+
   resources :sessions, only: [:new, :create, :destroy]
-  
+
   resources :advertisements
   resources :questions
+
+  resources :labels, only: [:show]
+
+
+
   
   post 'users/confirm' => 'users#confirm'
-  
-   get 'about' => 'welcome#about'
+
+  get 'about' => 'welcome#about'
+
+  get 'faq' => 'welcome#faq'
 
   root to: 'welcome#index'
- 
+
 end
