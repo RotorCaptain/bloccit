@@ -65,3 +65,5 @@ gem 'pry-rails'
 gem 'thin'
 
 gem 'faker'
+
+gem 'figaro', '1.0'
