@@ -2,11 +2,11 @@ require 'rails_helper'
 include RandomData
 
 RSpec.describe Post, type: :model do
-  #create a parent topic for post.
+  #creates a parent topic for post.
   let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)}
-  #create a user to associate with a test post.
+  #creates a user to associate with a test post.
   let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld")}
-  #associate post with topic with topic.posts.create!. This is a chained method call which creates a post for a given topic. associate user with post when we create the test post.
+  #associates a post with topic with topic.posts.create!. This is a chained method call which creates a post for a given topic. Associate the user with  post when we create the test post.
   let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)}
 
   it {should have_many(:labelings) }
@@ -65,19 +65,19 @@ RSpec.describe Post, type: :model do
      describe "#update_rank" do
        it "calculates the correct rank" do
          post.update_rank
-         expect(post.rank).to eq(post.points + (post.created_at - Time.new(1970,1,1)) / 1.day.seconds)
+         expect(post.rank).to eq (post.points + (post.created_at - Time.new(1970,1,1)) / 1.day.seconds)
        end
 
        it "updates the rank when an up vote is created" do
          old_rank = post.rank
          post.votes.create!(value: 1)
-         expect(post.rank).to eq(old_rank + 1)
+         expect(post.rank).to eq (old_rank + 1)
        end
 
        it "updates the rank when a down vote is created" do
          old_rank = post.rank
          post.votes.create!(value: -1)
-         expect(post.rank).to eq(old_rank - 1)
+         expect(post.rank).to eq (old_rank - 1)
        end
      end
 
@@ -88,4 +88,23 @@ RSpec.describe Post, type: :model do
        end
      end
    end
+
+   describe "after_create" do
+      before do
+        @another_post = Post.new(body: 'New Post Body', topic: topic, user: user)
+      end
+
+      it "sends an email to the user who created the post" do
+        post = user.post.create(post: post)
+        expect(FavoriteMailer).to receive(:new_post).with(user, @another_post).and_return(double(deliver_now: true))
+
+        @another_post.save
+      end
+
+      it "does not send emails to users who didn't create the post" do
+        expect(FavoriteMailer).not_to receive(:new_post)
+
+        @another_post.save
+      end
+    end
 end
