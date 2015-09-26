@@ -7,7 +7,6 @@ RSpec.describe Vote, type: :model do
   let(:post) { create(:post) }
   let(:vote) { Vote.create!(value: 1, post: post, user: user) }
  
-
   it { should belong_to(:post) }
   it { should belong_to(:user) }
 

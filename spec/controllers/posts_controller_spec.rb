@@ -1,6 +1,6 @@
 require 'rails_helper'
 include RandomData
-#add SessionsHelper so that we can use the create_session(user) method later in the spec.
+
 include SessionsHelper
 
 RSpec.describe PostsController, type: :controller do

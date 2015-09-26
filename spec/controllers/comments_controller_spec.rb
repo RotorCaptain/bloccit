@@ -9,7 +9,6 @@ RSpec.describe CommentsController, type: :controller do
   let(:my_post) { create(:post, topic: my_topic, user: my_user) }
   let(:my_comment) { Comment.create!(body: 'Comment Body', post: my_post, user: my_user) }
  
- 
    context "guest" do
      describe "POST create" do
        it "redirects the user to the sign in view" do
@@ -25,7 +24,6 @@ RSpec.describe CommentsController, type: :controller do
        end
      end
    end
- 
  
    context "member user doing CRUD on a comment they don't own" do
      before do
@@ -50,8 +48,6 @@ RSpec.describe CommentsController, type: :controller do
        end
      end
    end
- 
- 
  
    context "member user doing CRUD on a comment they own" do
      before do
@@ -83,10 +79,8 @@ RSpec.describe CommentsController, type: :controller do
      end
    end
  
- 
    context "admin user doing CRUD on a comment they don't own" do
      before do
-       other_user.admin!
        create_session(other_user)
      end
  

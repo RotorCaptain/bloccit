@@ -24,6 +24,7 @@ RSpec.describe Label, type: :model do
       expect(topic_label).to eql(post_label)
     end
   end
+  
   describe ".update_labels" do
     it "takes a comma delimited string and returns an array of Labels" do
       labels = "#{label.name}, #{label2.name}"

@@ -23,7 +23,7 @@ RSpec.describe User, type: :model do
   it { should allow_value("user@bloccit.com").for(:email) }
   it { should_not allow_value("userbloccit.com").for(:email) }
 
-  
+
   it { should validate_presence_of(:password) }
   it { should have_secure_password }
   it { should validate_length_of(:password).is_at_least(6) }
@@ -113,7 +113,6 @@ RSpec.describe User, type: :model do
     let(:user_with_invalid_email) { build(:user, email: "") }
     let(:user_with_invalid_email_format) { build(:user, email: "invalid_format") }
 
-
     it "should be an invalid user due to blank name" do
       expect(user_with_invalid_name).to_not be_valid
     end
@@ -127,8 +126,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  
-  
   describe "#favorite_for(post)" do
      before do
        topic = Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph)
@@ -136,27 +133,20 @@ RSpec.describe User, type: :model do
      end
  
      it "returns `nil` if the user has not favorited the post" do
-
        expect(user.favorite_for(@post)).to be_nil
      end
  
      it "returns the appropriate favorite if it exists" do
-
        favorite = user.favorites.where(post: @post).create
- 
        expect(user.favorite_for(@post)).to eq(favorite)
      end
    end
    
-   
    describe ".avatar_url" do
-
      let(:known_user) { create(:user, email: "blochead@bloc.io") }
  
      it "returns the proper Gravatar url for a known email entity" do
-
        expected_gravatar = "http://gravatar.com/avatar/bb6d1172212c180cfbdb7039129d7b03.png?s=48"
- 
        expect(User.avatar_url(known_user, 48)).to eq(expected_gravatar)
      end
    end

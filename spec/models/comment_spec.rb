@@ -21,7 +21,6 @@ RSpec.describe Comment, type: :model do
   end
   
   describe "after_create" do
-
      before do
        @another_comment = Comment.new(body: 'Comment Body', post: post, user: user)
      end

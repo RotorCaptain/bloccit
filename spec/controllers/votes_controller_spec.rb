@@ -2,7 +2,6 @@ require 'rails_helper'
 include RandomData
 include SessionsHelper
 
-
 RSpec.describe VotesController, type: :controller do
   let(:my_topic) { create(:topic) }
   let(:my_user) { create(:user) }
@@ -10,7 +9,6 @@ RSpec.describe VotesController, type: :controller do
   let(:my_post) { create(:post, topic: my_topic, user: my_user) }
   let(:my_vote) { Vote.create!(value: 1) }
  
-
    context "guest" do
      describe "POST up_vote" do
        it "redirects the user to the sign in view" do
@@ -18,7 +16,6 @@ RSpec.describe VotesController, type: :controller do
          expect(response).to redirect_to(new_session_path)
        end
      end
-     
      
      describe "POST down_vote" do
        it "redirects the user to the sign in view" do
