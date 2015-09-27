@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
   
 
   def index
-    @topics = Topic.visible_to(current_user)
+    @topic = Topic.visible_to(current_user)
   end
 
   def show
