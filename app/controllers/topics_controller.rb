@@ -34,6 +34,7 @@ class TopicsController < ApplicationController
     end
   end
 
+
   def edit
     @topic = Topic.find(params[:id])
   end
@@ -44,6 +45,7 @@ class TopicsController < ApplicationController
 
     if @topic.save
       @topic.labels = Label.update_labels(params[:topic][:labels])
+      @topic.rating = Rating.update_rating(params[:topic][:rating])
       flash[:notice] = "Topic was updated."
       redirect_to @topic
     else
@@ -57,7 +59,7 @@ class TopicsController < ApplicationController
 
     if @topic.destroy
       flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
-      redirect_to action: :index
+      redirect_to @topic
     else
       flash[:error] = 'There was an error in deleting the topic.'
       render :show
