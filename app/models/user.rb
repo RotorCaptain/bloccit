@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   before_save  :downcase_email
   before_save  :capitalize_name
   before_save  :enum_role
+  
+  before_create :generate_auth_token
 
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   NAME_REGEX = /\A[A-Z][a-z]*\b/
@@ -48,4 +50,12 @@ class User < ActiveRecord::Base
     gravatar_id = Digest::MD5::hexdigest(user.email).downcase
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
+  
+ # #3
+   def generate_auth_token
+     loop do
+       self.auth_token = SecureRandom.base64(64)
+       break unless User.find_by(auth_token: auth_token)
+     end
+   end
 end
